@@ -12,3 +12,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  joinedAt DateTime @default(now())
+  account  Account?
+  transaction Transaction[]
+}
+
+model Account {
+  id      String      @id @default(uuid())
+  balance Float       @default(0.0)
+  type    AccountType
+  userId  String      @unique
+  user    User        @relation(fields: [userId], references: [id])
+  transaction Transaction[]
+}
+
+model Transaction {
+  id  String @id @default(uuid())
+  accountId String
+  userId String
+  Type TransactionType
+  Date DateTime
+  isRecurring Boolean
+  status Boolean
+  description String
+  user User @relation(fields: [userId], references: [id])
+  account Account @relation(fields: [accountId], references: [id])
+}
+enum AccountType {
+  SAVINGS
+  CURRENT
+}
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
