@@ -12,7 +12,9 @@
   "dependencies": {
     "@prisma/client": "^6.4.1",
     "axios": "^1.8.1",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "node": "^23.9.0"
   },
   "devDependencies": {
