@@ -21,6 +21,8 @@ model User {
   joinedAt DateTime @default(now())
   account  Account?
   transaction Transaction[]
+  financialProfile FinancialProfile?
+
 }
 
 model Account {
@@ -30,7 +32,6 @@ model Account {
   userId  String      @unique
   user    User        @relation(fields: [userId], references: [id])
   transaction Transaction[]
-  financialProfile FinancialProfile?
 }
 
 model Transaction {
