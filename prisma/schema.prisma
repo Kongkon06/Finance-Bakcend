@@ -30,6 +30,7 @@ model Account {
   userId  String      @unique
   user    User        @relation(fields: [userId], references: [id])
   transaction Transaction[]
+  financialProfile FinancialProfile?
 }
 
 model Transaction {
@@ -43,6 +44,27 @@ model Transaction {
   description String
   user User @relation(fields: [userId], references: [id])
   account Account @relation(fields: [accountId], references: [id])
+}
+
+model FinancialProfile {
+  id               String  @id @default(uuid())
+  userId           String  @unique
+  user             User    @relation(fields: [userId], references: [id])
+  Income           Float
+  Age              Int
+  Dependents       Int
+  Disposable_Income Float
+  Desired_Savings  Float
+  Groceries        Float
+  Transport        Float
+  Eating_Out       Float
+  Entertainment    Float
+  Utilities        Float
+  Healthcare       Float
+  Education        Float
+  Miscellaneous    Float
+  Occupation       String
+  City_Tier        String
 }
 enum AccountType {
   SAVINGS
